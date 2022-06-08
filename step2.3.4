@@ -1,0 +1,14 @@
+Запрос на обновление, вложенные запросы
+Задание
+Занести для книги «Стихотворения и поэмы» Лермонтова жанр «Поэзия», а для книги «Остров сокровищ» Стивенсона - «Приключения». (Использовать два запроса).
+ 
+Решение:
+UPDATE book
+SET book.genre_id = IF (book_id =10, (SELECT genre_id
+               FROM genre 
+               WHERE name_genre = 'Поэзия'), book.genre_id),
+    book.genre_id = IF (book_id =11 ,(SELECT genre_id
+               FROM genre 
+               WHERE name_genre = 'Приключения') ,book.genre_id);         
+
+SELECT * FROM book;
